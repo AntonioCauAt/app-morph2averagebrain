@@ -28,7 +28,7 @@ subject = 'output'
 # Copy the two stc files into the same folder
 dest_dir = "tmp_stc"
 
-os.makedirs(dest_dir, exist_ok=True)
+os.makedirs(dest_dir)
 
 file1 = os.path.join(dest_dir, 'inv-rh.stc')
 file2 = os.path.join(dest_dir, 'inv-lh.stc')

@@ -33,7 +33,7 @@ mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)
 
 # Read STC files
 # Since you can't read stc files from right and left hemispheres at once
-# We load and morph them separately
+# We read and morph them separately
 stc_rh = mne.read_source_estimate(fname_stc_rh)
 stc_lh = mne.read_source_estimate(fname_stc_lh)
 

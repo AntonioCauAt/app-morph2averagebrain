@@ -25,39 +25,36 @@ subjects_dir  = config['output']
 
 subject = 'output'
 
-# Copy the two stc files into the same folder
-dest_dir = os.path.join(__location__, 'tmp_stc')
-
-os.makedirs(dest_dir)
-
-file1 = os.path.join(dest_dir, 'inv-rh.stc')
-file2 = os.path.join(dest_dir, 'inv-lh.stc')
-
-os.system("cp " + fname_stc_rh + " " + file1)
-os.system("cp " + fname_stc_lh + " " + file2)
-
 
 # == MORPH TO AVERAGE BRAIN ==
 
 # Read STC file
-stc = mne.read_source_estimate(dest_dir)
+stc_rh = mne.read_source_estimate(fname_stc_rh)
+stc_lh = mne.read_source_estimate(fname_stc_lh)
 
 # Get fsaverage template
 mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)
 
 # Compute and apply morphing
-morph = mne.compute_source_morph(stc, subject_from=subject,
+morph_rh = mne.compute_source_morph(stc_rh, subject_from=subject,
                                  subject_to='fsaverage',
                                  subjects_dir=subjects_dir)
-stc_fsaverage = morph.apply(stc)
+morph_lh = mne.compute_source_morph(stc_lh, subject_from=subject,
+                                 subject_to='fsaverage',
+                                 subjects_dir=subjects_dir)
+stc_rh_fsaverage = morph.apply(stc_rh)
+stc_lh_fsaverage = morph.apply(stc_lh)
 
 #stc_fsaverage.plot(surface='inflated', hemi='both',
 #                   subjects_dir=subjects_dir)
 
 
 # SAVE STC
-fname_stc_average = os.path.join('out_dir', 'inv')
-stc_fsaverage.save(fname_stc_average)
+fname_stc_rh_fsaverage = os.path.join('out_dir', 'inv-rh.stc')
+fname_stc_lh_fsaverage = os.path.join('out_dir', 'inv-lh.stc')
+
+stc_rh_fsaverage.save(fname_stc_rh_fsaverage)
+stc_lh_fsaverage.save(fname_stc_lh_fsaverage)
 
 # Create and save report
 report = mne.Report(title='Morph to Average Brain Report')

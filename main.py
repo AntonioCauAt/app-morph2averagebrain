@@ -26,9 +26,9 @@ subjects_dir  = config['output']
 subject = 'output'
 
 # Copy the two stc files into the same folder
-dest_dir = "temp_stc"
+dest_dir = "out_dir"
 
-os.makedirs(dest_dir, exist_ok=True)
+#os.makedirs(dest_dir, exist_ok=True)
 
 file1 = os.path.join(dest_dir, 'inv-rh.stc')
 file2 = os.path.join(dest_dir, 'inv-lh.stc')
@@ -36,6 +36,7 @@ file2 = os.path.join(dest_dir, 'inv-lh.stc')
 os.system("cp " + fname_stc_rh + " " + file1)
 os.system("cp " + fname_stc_lh + " " + file2)
 
+'''
 # == MORPH TO AVERAGE BRAIN ==
 
 # Read STC file
@@ -63,3 +64,4 @@ report = mne.Report(title='Morph to Average Brain Report')
 #report.add_figs_to_section(fig_stc, 'Source Estimate', section='STC')
 report_path = os.path.join('out_dir_report', 'report.html')
 report.save(report_path, overwrite=True)
+'''

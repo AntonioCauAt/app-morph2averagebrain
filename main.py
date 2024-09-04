@@ -30,8 +30,8 @@ dest_dir = "temp_stc"
 
 os.makedirs(dest_dir, exist_ok=True)
 
-archivo_destino1 = os.path.join(dest_dir, fname_stcr)
-archivo_destino2 = os.path.join(dest_dir, fname_stcl)
+archivo_destino1 = os.path.join(dest_dir, 'inv-rh.stc')
+archivo_destino2 = os.path.join(dest_dir, 'inv-lh.stc')
 
 os.system("mv " + fname_stcr + " " + archivo_destino1)
 os.system("mv " + fname_stcl + " " + archivo_destino2)

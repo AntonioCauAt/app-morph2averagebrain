@@ -57,7 +57,7 @@ fname_stc_rh_fsaverage = os.path.join('out_dir', 'inv')
 #fname_stc_lh_fsaverage = os.path.join('out_dir', 'inv-lh.stc')
 
 stc_rh_fsaverage.save(fname_stc_rh_fsaverage)
-stc_lh_fsaverage.save(fname_stc_lh_fsaverage)
+#stc_lh_fsaverage.save(fname_stc_lh_fsaverage)
 
 # Create and save report
 report = mne.Report(title='Morph to Average Brain Report')

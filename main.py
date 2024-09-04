@@ -20,11 +20,24 @@ with open(__location__+'/config.json') as config_json:
     
 
 # == CONFIG PARAMETERS ==
-fname_stc   = config['inverse']
+fname_stcr   = config['stc-rh']
+fname_stcl = config ['stc-lh']
 subjects_dir = config['output'] 
 subject = 'output'
 
-stc = mne.read_source_estimate(fname_stc)
+#Copy the two stc files into the same folder
+dest_dir = "temp_stc"
+
+os.makedirs(dest_dir, exist_ok=True)
+
+archivo_destino1 = os.path.join(dest_dir, fname_stcr)
+archivo_destino2 = os.path.join(dest_dir, fname_stcl)
+
+os.system("mv " + fname_stcr + " " + archivo_destino1)
+os.system("mv " + fname_stcl + " " + archivo_destino2)
+
+
+stc = mne.read_source_estimate(dest_dir)
 mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)
 morph = mne.compute_source_morph(stc, subject_from=subject,
                                  subject_to='fsaverage',

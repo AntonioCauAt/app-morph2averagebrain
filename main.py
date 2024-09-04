@@ -33,8 +33,8 @@ os.makedirs(dest_dir, exist_ok=True)
 file1 = os.path.join(dest_dir, 'inv-rh.stc')
 file2 = os.path.join(dest_dir, 'inv-lh.stc')
 
-os.system("mv " + fname_stc_rh + " " + file1)
-os.system("mv " + fname_stc_lh + " " + file2)
+os.system("cp " + fname_stc_rh + " " + file1)
+os.system("cp " + fname_stc_lh + " " + file2)
 
 # == MORPH TO AVERAGE BRAIN ==
 

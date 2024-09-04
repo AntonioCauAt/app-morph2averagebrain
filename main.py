@@ -26,7 +26,7 @@ subjects_dir  = config['output']
 subject = 'output'
 
 # Copy the two stc files into the same folder
-dest_dir = "out_dir"
+dest_dir = "tmp_stc"
 
 #os.makedirs(dest_dir, exist_ok=True)
 
@@ -36,11 +36,11 @@ file2 = os.path.join(dest_dir, 'inv-lh.stc')
 os.system("cp " + fname_stc_rh + " " + file1)
 os.system("cp " + fname_stc_lh + " " + file2)
 
-'''
+
 # == MORPH TO AVERAGE BRAIN ==
 
 # Read STC file
-stc = mne.read_source_estimate(fname_stc_rh)
+stc = mne.read_source_estimate(dest_dir)
 
 # Get fsaverage template
 mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)
@@ -64,4 +64,4 @@ report = mne.Report(title='Morph to Average Brain Report')
 #report.add_figs_to_section(fig_stc, 'Source Estimate', section='STC')
 report_path = os.path.join('out_dir_report', 'report.html')
 report.save(report_path, overwrite=True)
-'''
+

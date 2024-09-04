@@ -34,18 +34,18 @@ mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)
 # Read STC files
 # Since you can't read stc files from right and left hemispheres at once
 # We read and morph them separately
-stc_rh = mne.read_source_estimate(fname_stc_rh)
-stc_lh = mne.read_source_estimate(fname_stc_lh)
+stc_rh = mne.read_source_estimate(fname_stc_rh[:-7])
+#stc_lh = mne.read_source_estimate(fname_stc_lh)
 
 # Compute and apply morphing
 morph_rh = mne.compute_source_morph(stc_rh, subject_from=subject,
                                  subject_to='fsaverage',
                                  subjects_dir=subjects_dir)
-morph_lh = mne.compute_source_morph(stc_lh, subject_from=subject,
-                                 subject_to='fsaverage',
-                                 subjects_dir=subjects_dir)
+#morph_lh = mne.compute_source_morph(stc_lh, subject_from=subject,
+#                                subject_to='fsaverage',
+#                                 subjects_dir=subjects_dir)
 stc_rh_fsaverage = morph_rh.apply(stc_rh)
-stc_lh_fsaverage = morph_lh.apply(stc_lh)
+#stc_lh_fsaverage = morph_lh.apply(stc_lh)
 
 # FIGURES
 #stc_fsaverage.plot(surface='inflated', hemi='both',
@@ -53,8 +53,8 @@ stc_lh_fsaverage = morph_lh.apply(stc_lh)
 
 
 # SAVE STC
-fname_stc_rh_fsaverage = os.path.join('out_dir', 'inv-rh.stc')
-fname_stc_lh_fsaverage = os.path.join('out_dir', 'inv-lh.stc')
+fname_stc_rh_fsaverage = os.path.join('out_dir', 'inv')
+#fname_stc_lh_fsaverage = os.path.join('out_dir', 'inv-lh.stc')
 
 stc_rh_fsaverage.save(fname_stc_rh_fsaverage)
 stc_lh_fsaverage.save(fname_stc_lh_fsaverage)

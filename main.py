@@ -39,7 +39,7 @@ os.system("cp " + fname_stc_lh + " " + file2)
 # == MORPH TO AVERAGE BRAIN ==
 
 # Read STC file
-stc = mne.read_source_estimate(file1)
+stc = mne.read_source_estimate(fname_stc_rh)
 
 # Get fsaverage template
 mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)

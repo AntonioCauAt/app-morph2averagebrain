@@ -28,12 +28,14 @@ subject = 'output'
 
 # == MORPH TO AVERAGE BRAIN ==
 
-# Read STC file
-stc_rh = mne.read_source_estimate(fname_stc_rh)
-stc_lh = mne.read_source_estimate(fname_stc_lh)
-
 # Get fsaverage template
 mne.datasets.fetch_fsaverage(subjects_dir=subjects_dir)
+
+# Read STC files
+# Since you can't read stc files from right and left hemispheres at once
+# We load and morph them separately
+stc_rh = mne.read_source_estimate(fname_stc_rh)
+stc_lh = mne.read_source_estimate(fname_stc_lh)
 
 # Compute and apply morphing
 morph_rh = mne.compute_source_morph(stc_rh, subject_from=subject,
@@ -42,9 +44,10 @@ morph_rh = mne.compute_source_morph(stc_rh, subject_from=subject,
 morph_lh = mne.compute_source_morph(stc_lh, subject_from=subject,
                                  subject_to='fsaverage',
                                  subjects_dir=subjects_dir)
-stc_rh_fsaverage = morph.apply(stc_rh)
-stc_lh_fsaverage = morph.apply(stc_lh)
+stc_rh_fsaverage = morph_rh.apply(stc_rh)
+stc_lh_fsaverage = morph_lh.apply(stc_lh)
 
+# FIGURES
 #stc_fsaverage.plot(surface='inflated', hemi='both',
 #                   subjects_dir=subjects_dir)
 

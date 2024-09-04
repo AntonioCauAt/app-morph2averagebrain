@@ -26,7 +26,7 @@ subjects_dir  = config['output']
 subject = 'output'
 
 # Copy the two stc files into the same folder
-dest_dir = "tmp_stc"
+dest_dir = os.path.join(__location__, 'tmp_stc')
 
 os.makedirs(dest_dir)
 

@@ -1,5 +1,48 @@
 # Morph to average brain
 
+<!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
+
+> **Morphs MEG/EEG source estimates from an individual brain to the FreeSurfer fsaverage brain with MNE-Python compute_source_morph, and outputs the morphed STC, a plot and a report.**
+
+Reads left and right hemisphere source estimates, fetches fsaverage into the subject's FreeSurfer directory, computes a source morph from the subject to fsaverage and applies it. Use it to bring individual source estimates into a common space for group analysis. Note: subject_to is not read by main.py; the target is always fsaverage.
+
+| | |
+|---|---|
+| 📥 **Inputs** | `neuro/meeg/stc` · `raw` |
+| 📤 **Outputs** | `neuro/meeg/stc` · `report/html` · `generic/image/png` |
+| 🐳 **Container** | `brainlife/mne:1.2.1` |
+| ⚙️ **Resources** | 8 CPUs |
+| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.831](https://doi.org/10.25663/brainlife.app.831) |
+
+#### 📥 Inputs
+
+| Input | Datatype | Required | Description |
+|---|---|---|---|
+| `stc1` | `neuro/meeg/stc` (stc) | yes | Source time course of the subject (left and right hemisphere .stc files). |
+| `bem1` | `raw` (bem) | yes | FreeSurfer subject directory of the same subject (with BEM), used as SUBJECTS_DIR. |
+
+#### 📤 Outputs
+
+| Output | Datatype | Description |
+|---|---|---|
+| `out_dir` | `neuro/meeg/stc` | Source estimate morphed to fsaverage (left and right .stc files). |
+| `out_dir_report` | `report/html` | HTML report of the morphed source estimate. |
+| `out_figs` | `generic/image/png` | Plot of the morphed source estimate. |
+
+<details>
+<summary><b>⚙️ Parameters</b> (1)</summary>
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `subject_to` | string | `None` | Name of the subject to which to morph as named in the SUBJECTS_DIR. Default is 'fsaverage'. If None, src_to[0]['subject_his_id'] will be used. |
+
+</details>
+
+📚 **References used by this App:**
+- Avesani P, McPherson B, Hayashi S, et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. Sci Data 6, 69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
+- Gramfort A, et al. MEG and EEG data analysis with MNE-Python. Front Neurosci 7(267):1-13 (2013). [doi:10.3389/fnins.2013.00267](https://doi.org/10.3389/fnins.2013.00267)
+
+<!-- brainlife-app:end -->
 
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
 [![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.826-blue.svg)](https://doi.org/10.25663/brainlife.app.826)
